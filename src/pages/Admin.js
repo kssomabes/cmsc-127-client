@@ -5,6 +5,7 @@ import { getSession } from '../api/auth';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'; //gives you access to additional slashes to your address
 import Requisitions from '../components/admin/requisition/viewAll'
 import Orders from '../components/admin/order/viewAll';
+// import Items from '../components/admin/item/Item';
 import { Dropdown, Input, Menu, Segment } from 'semantic-ui-react'
 
 
@@ -46,7 +47,9 @@ class Admin extends Component{
 		else if (activeItem === 'orders'){ 
 			console.log('new display');
 			display = <Orders />;
-		}else if (activeItem === 'items') console.log('ahe');
+		}
+
+		// else if (activeItem === 'items') display = <Items />
 		
     return (
 	      <Segment inverted>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
-import { getMyPurchReq } from '../../../api/normal';
+import { getMyPurchReq, deleteMyPurchReq } from '../../../api/normal';
+import DeletePR from './DeletePR';
 
 export default class ViewAll extends Component {
 
@@ -22,10 +23,12 @@ export default class ViewAll extends Component {
     return (
       <Table singleLine striped color='teal'>
         <Table.Header >
+        </Table.Header>
+        <Table.Header >
           <Table.Row >
             <Table.HeaderCell>Request ID </Table.HeaderCell>
             <Table.HeaderCell>Date Submitted</Table.HeaderCell>
-
+            <Table.HeaderCell></Table.HeaderCell>
 
 
           </Table.Row>
@@ -39,7 +42,7 @@ export default class ViewAll extends Component {
                 <Table.Row key = {requisition.requestID} >
 	                <Table.Cell> {requisition.requestID}</Table.Cell>
                   <Table.Cell> {requisition.dateSubmitted}</Table.Cell>
-
+                  <Table.Cell collapsing><DeletePR value = {requisition.requestID}/></Table.Cell>
                  </Table.Row>
               );
             })
