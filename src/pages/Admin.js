@@ -1,39 +1,69 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router';
 import axios from 'axios';
-import NavBar from '../components/admin/navbar';
+import NavBar from '../components/admin/NavBar';
+import { getSession } from '../api/auth';
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'; //gives you access to additional slashes to your address
+import Requisitions from '../components/admin/requisition/viewAll'
+import Orders from '../components/admin/order/viewAll';
+import { Dropdown, Input, Menu, Segment } from 'semantic-ui-react'
+
 
 class Admin extends Component{
 	constructor(props){
 		super(props);
 
-		this.state = {
-      adminId: '',
-			userId: ''
-		}
+	  this.state = { 
+	  	activeItem: 'home',
+	  	userId : '',
+	  	accountType: ''
+	  }
+	
+
+	}
+
+	handleItemClick = (e, { name }) => 
+
+	{
+		this.setState({ activeItem: name })	
 	}
 
 	componentDidMount(){
-		fetch(`http://localhost:3001/session`) //insert dynamic JS variables and values
-		.then((response) => {
-		return response.json () 
-		}) //returns in JSON format	
-		.then((result) => {
+		getSession().then((res) => {
 			this.setState({
-				adminId: result.data.adminID,
-				userId: result.data.userID
-			}); //stores the result to the corresponding attributes admin
-		}).then((response) => {return response.json () })
-		.catch((e) => { console.log(e); })
-
+				userId: res.data.user.userID,
+				accountType: res.data.user.accountType
+			});
+		});
 	}
 	
 	render(){
 
-		return(
-			
-				<NavBar/>
-      
+		let display = {};		
+		const { activeItem } = this.state
+		if (activeItem ==='home') display = <Requisitions />;
+		else if (activeItem === 'requisitions')
+			display = <Requisitions />;
+		else if (activeItem === 'orders'){ 
+			console.log('new display');
+			display = <Orders />;
+		}else if (activeItem === 'items') console.log('ahe');
+		
+    return (
+	      <Segment inverted>
+	        <Menu inverted pointing secondary>
+	          <Menu.Item name='home' label='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+	          <Menu.Item name='requisitions' label='Requisitions' active={activeItem === 'requisitions'}onClick={this.handleItemClick} /> 
+	          <Menu.Item name='orders' label='Orders' active={activeItem === 'orders'} onClick={this.handleItemClick} />
+	          <Menu.Item name='items' label='Items' as='a' href='/items' active={activeItem === 'items'} onClick={this.handleItemClick} />
+	          <Menu.Menu position='right'>
+	            <Menu.Item name='search' label='Search'>
+	            <Input icon='search' placeholder='Search username...'/>
+	            </Menu.Item>
+	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+	          </Menu.Menu>
+	        </Menu>
+	        {display}
+	      </Segment>
 		);
 	}
 }
