@@ -38,6 +38,7 @@ export default class AddItem extends Component {
     });
 
     this.handleClose();
+    window.location.reload();
   }
 
   

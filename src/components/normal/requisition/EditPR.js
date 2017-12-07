@@ -40,7 +40,7 @@ export default class EditPR from extends Component {
     return (
       <div>
         <Modal trigger={<Button icon='add' onClick={this.handleOpen}> Add Purchase Requisition</Button>} open={this.state.modalOpen} onClose={this.handleClose}>
-          <Modal.Header>Edit Purchase Requisition</Modal.Header>
+          <Modal.Header>Edit 	Purchase Requisition</Modal.Header>
           <Modal.Content>
 
           <Form onSubmit = {this.editPR}>

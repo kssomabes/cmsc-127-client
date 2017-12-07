@@ -3,6 +3,7 @@ import { getSession } from '../api/auth';
 import Requisitions from '../components/normal/requisition/viewAll'
 import Orders from '../components/normal/order/viewAll';
 import Items from '../components/normal/item/viewAll';
+import Deliveries from '../components/normal/delivery/viewAll';
 import AddPR from './../components/normal/requisition/AddPR'
 import { Input, Menu, Segment } from 'semantic-ui-react'
 
@@ -46,6 +47,8 @@ class Admin extends Component{
 		}else if (activeItem === 'items'){ 
 			console.log('active Item ', activeItem);
 			display = <Items />;
+		}else if (activeItem === 'deliveries'){ 
+			display = <Deliveries />;
 		}else console.log('active Item ', activeItem);
 		
     return (
@@ -55,6 +58,7 @@ class Admin extends Component{
 	          <Menu.Item name='requisitions' label='Requisitions' active={activeItem === 'requisitions'}onClick={this.handleItemClick} /> 
 	          <Menu.Item name='orders' label='Orders' active={activeItem === 'orders'} onClick={this.handleItemClick} />
 	          <Menu.Item name='items' label='Items' active={activeItem === 'items'} onClick={this.handleItemClick} />
+	          <Menu.Item name='deliveries' label='Deliveries' active={activeItem === 'deliveries'} onClick={this.handleItemClick} />
 	          <Menu.Menu position='right'>
 	            <Menu.Item name='search' label='Search'>
 	            <Input icon='search' placeholder='Search username...'/>

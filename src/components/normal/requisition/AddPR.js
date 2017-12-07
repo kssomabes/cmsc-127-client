@@ -1,6 +1,8 @@
 import React, { Component} from "react";
 import { Button, Modal, Checkbox, Form, Dropdown, Table } from 'semantic-ui-react';
 import { showItems } from '../../../api/items';
+import { addPR } from '../../../api/normal';
+
 // this.props.value holds the userId
 
 let someVar = []; 
@@ -27,6 +29,20 @@ export default class AddPR extends Component {
     console.log(this.state);
     console.log(e);
     console.log('where api');
+
+    addPR(someVar).then((res)=> {
+      if (!res.data.data){
+        alert('Internal server error. Failed to add PR');
+      }else {
+        if (res.data.data === 'SUCCESS'){
+          console.log('here na me');
+          alert('Successfully added a purchase request');
+        }else{
+          alert('Failed to add PR');
+        }
+      }
+    });
+    window.location.reload();
   }
 
   

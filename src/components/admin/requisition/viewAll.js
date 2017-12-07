@@ -1,5 +1,4 @@
 import React, { Component} from "react";
-import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { getPrAndItems, getAllPurchReq } from '../../../api/admin';
 import ApprovePR from './ApprovePR';

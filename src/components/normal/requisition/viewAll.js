@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
-import { getMyPurchReq, deleteMyPurchReq } from '../../../api/normal';
+import { getMyPurchReq } from '../../../api/normal';
 import DeletePR from './DeletePR';
 import ViewPR from './ViewPR';
 

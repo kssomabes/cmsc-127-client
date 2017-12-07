@@ -19,3 +19,11 @@ export const viewItemsInPr = (req_id) => {
 export const viewItemsInPo = (req_id) => {
 	return axios.get(`/user_normal/viewItemsInPo/${req_id}`); 
 }
+
+export const getMyDelivery = (userID) => {
+	return axios.get(`/user_normal/viewMyDelivery`, userID); 
+}
+
+export const addPR = (body) => {
+	return axios.post(`/user_normal/addNewPurchReq`, body);
+}

@@ -3,6 +3,7 @@ import { getSession } from '../api/auth';
 import Requisitions from '../components/admin/requisition/viewAll'
 import Orders from '../components/admin/order/viewAll';
 import Items from '../components/admin/item/viewAll';
+import Deliveries from '../components/admin/delivery/viewAll';
 import AddItem from '../components/admin/item/AddItem';
 import AddDelivery from '../components/admin/delivery/AddDelivery';
 import { Input, Button, Menu, Segment } from 'semantic-ui-react'
@@ -25,6 +26,10 @@ class Admin extends Component{
 
 	{
 		this.setState({ activeItem: name })	
+	}
+
+	handleOnChange = (e) => {
+		console.log('Trying to search ', e.target.value);
 	}
 
 	componentDidMount(){
@@ -52,6 +57,8 @@ class Admin extends Component{
 		}else if (activeItem === 'addItem'){ 
 			console.log('active Item ', activeItem);
 			display = <AddItem />;
+		}else if (activeItem === 'deliveries'){ 
+			display = <Deliveries />;
 		}
 
 		// else if (activeItem === 'items') display = <Items />
@@ -63,9 +70,13 @@ class Admin extends Component{
 	          <Menu.Item name='requisitions' label='Requisitions' active={activeItem === 'requisitions'}onClick={this.handleItemClick} /> 
 	          <Menu.Item name='orders' label='Orders' active={activeItem === 'orders'} onClick={this.handleItemClick} />
 	          <Menu.Item name='items' label='Items'active={activeItem === 'items'} onClick={this.handleItemClick} />
+	          <Menu.Item name='deliveries' label='Deliveries' active={activeItem === 'deliveries'} onClick={this.handleItemClick} />
 	          <Menu.Menu position='right'>
-	            <Menu.Item name='search' label='Search'>
-	            <Input icon='search' placeholder='Search username...'/>
+	            <Menu.Item name='searchPR' label='Search'>
+	            <Input icon='search' name ='searchPR' placeholder='Search PR...' onChange = {this.handleOnChange}/>
+	            </Menu.Item>
+	            <Menu.Item name='searchInventory' label='Search'>
+	            <Input icon='search' name ='searchPR' placeholder='Search PR...' onChange = {this.handleOnChange}/>
 	            </Menu.Item>
 	            <AddItem />
 	            <AddDelivery />

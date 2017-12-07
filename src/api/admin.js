@@ -46,3 +46,7 @@ export const addNewItem = (body) => {
 export const editItem = (body) => {
 	return axios.put(`/user_admin/updateItem`, body);
 }
+
+export const getAllDelivery = () => {
+	return axios.get(`/user_admin/getAllDelivery`);
+}
