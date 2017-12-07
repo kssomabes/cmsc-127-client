@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { getSession } from '../api/auth';
 import Requisitions from '../components/admin/requisition/viewAll'
 import Orders from '../components/admin/order/viewAll';
-// import Items from '../components/admin/item/Item';
+import Items from '../components/admin/item/viewAll';
+import AddItem from '../components/admin/item/AddItem';
+import AddDelivery from '../components/admin/delivery/AddDelivery';
 import { Input, Button, Menu, Segment } from 'semantic-ui-react'
 
 
@@ -44,6 +46,12 @@ class Admin extends Component{
 		else if (activeItem === 'orders'){ 
 			console.log('new display');
 			display = <Orders />;
+		}else if (activeItem === 'items'){ 
+			console.log('active Item ', activeItem);
+			display = <Items />;
+		}else if (activeItem === 'addItem'){ 
+			console.log('active Item ', activeItem);
+			display = <AddItem />;
 		}
 
 		// else if (activeItem === 'items') display = <Items />
@@ -54,13 +62,13 @@ class Admin extends Component{
 	          <Menu.Item name='home' label='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
 	          <Menu.Item name='requisitions' label='Requisitions' active={activeItem === 'requisitions'}onClick={this.handleItemClick} /> 
 	          <Menu.Item name='orders' label='Orders' active={activeItem === 'orders'} onClick={this.handleItemClick} />
-	          <Menu.Item name='items' label='Items' as='a' href='/items' active={activeItem === 'items'} onClick={this.handleItemClick} />
+	          <Menu.Item name='items' label='Items'active={activeItem === 'items'} onClick={this.handleItemClick} />
 	          <Menu.Menu position='right'>
 	            <Menu.Item name='search' label='Search'>
 	            <Input icon='search' placeholder='Search username...'/>
 	            </Menu.Item>
-	            <Button icon='add' name='addItem' label= 'Inventory' active={activeItem === 'addItem'} onClick={this.handleItemClick} />
-	            <Button icon='add' name='addDelivery' label= 'Delivery' active={activeItem === 'addDelivery'} onClick={this.handleItemClick} />
+	            <AddItem />
+	            <AddDelivery />
 	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
 	          </Menu.Menu>
 	        </Menu>

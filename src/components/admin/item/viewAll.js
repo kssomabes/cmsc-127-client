@@ -2,21 +2,23 @@ import React, { Component} from "react";
 import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { showItemsNoFilter } from '../../../api/items';
+import EditItem from './EditItem';
 
 export default class ViewAll extends Component {
 
-	state = {
-		items : []
-	}
+  state = {
+    items : []
+  }
 
   componentDidMount(){
     showItemsNoFilter().then((res) => {
-      console.log('res', res );
       this.setState({items: res.data.data})
     });
   }
 
    render() {
+
+
     const {items} = this.state;
 
     return (
@@ -29,6 +31,8 @@ export default class ViewAll extends Component {
             <Table.HeaderCell>Unit <br/> Price </Table.HeaderCell>
             <Table.HeaderCell>Quantity</Table.HeaderCell>
             <Table.HeaderCell>Description </Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
+
 
           </Table.Row>
         </Table.Header>
@@ -38,11 +42,15 @@ export default class ViewAll extends Component {
           {
           items.map((item) => {
               return (
-                <Table.Row key = {item.requestID} >
-	                <Table.Cell> {item.requestID}</Table.Cell>
-                  <Table.Cell> {item.dateSubmitted}</Table.Cell>
-                  <Table.Cell> {item.dateApproved}</Table.Cell>
-                  
+                <Table.Row key = {item.itemCode} >
+                  <Table.Cell> {item.itemCode}</Table.Cell>
+                  <Table.Cell> {item.name}</Table.Cell>
+                  <Table.Cell> {item.supplier}</Table.Cell>
+                  <Table.Cell> {item.unitPrice}</Table.Cell>
+                  <Table.Cell> {item.quantity}</Table.Cell>
+                  <Table.Cell> {item.description}</Table.Cell>
+                  <Table.Cell collapsing> <EditItem value = {item.itemCode} /> </Table.Cell>
+
                  </Table.Row>
               );
             })

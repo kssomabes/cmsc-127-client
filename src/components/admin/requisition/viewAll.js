@@ -8,7 +8,7 @@ import ViewPR from './ViewPR';
 export default class ViewAll extends Component {
 
 	state = {
-		requisitions : [],
+		requisitions : []
 	}
 
 
@@ -16,13 +16,11 @@ export default class ViewAll extends Component {
     getAllPurchReq().then((res) => {
       this.setState({requisitions: res.data.data})
     });
-
-    console.log('my state ', this.state.requisitions);
   }
 
    render() {
     const {requisitions} = this.state;
-    console.log('my state ', this.state.requisitions);
+
     return (
       <Table singleLine striped color='teal'>
         <Table.Header >

@@ -37,3 +37,8 @@ export const viewItemsInPr = (req_id) => {
 export const viewItemsInPo = (req_id) => {
 	return axios.get(`/user_admin/viewItemsInPo/${req_id}`); 
 }
+
+
+export const addNewItem = (body) => {
+	return axios.post(`/user_admin/addNewItem`, body);
+}

@@ -14,6 +14,8 @@ export default class ViewPO extends Component {
   handleClose = () => this.setState({ modalOpen: false })
 
   componentDidMount(){
+    console.log('mounted view po');
+    console.log(this.props.value);
     viewItemsInPo(this.props.value).then((res) => {
       this.setState({items: res.data.data})
     });
