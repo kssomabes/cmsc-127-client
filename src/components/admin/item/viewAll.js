@@ -1,5 +1,4 @@
 import React, { Component} from "react";
-import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { showItemsNoFilter } from '../../../api/items';
 import EditItem from './EditItem';
@@ -32,6 +31,7 @@ export default class ViewAll extends Component {
             <Table.HeaderCell>Quantity</Table.HeaderCell>
             <Table.HeaderCell>Description </Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
 
 
           </Table.Row>
@@ -49,7 +49,7 @@ export default class ViewAll extends Component {
                   <Table.Cell> {item.unitPrice}</Table.Cell>
                   <Table.Cell> {item.quantity}</Table.Cell>
                   <Table.Cell> {item.description}</Table.Cell>
-                  <Table.Cell collapsing> <EditItem value = {item.itemCode} /> </Table.Cell>
+                  <Table.Cell collapsing> <EditItem value = {item} /> </Table.Cell>
 
                  </Table.Row>
               );

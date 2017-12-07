@@ -9,14 +9,19 @@ export default class ViewPR extends Component {
 		items : []
 	}
 
-  handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => {
 
-  handleClose = () => this.setState({ modalOpen: false })
-
-  componentDidMount(){
+    this.setState({ modalOpen: true })
+    
     viewItemsInPr(this.props.value).then((res) => {
       this.setState({items: res.data.data})
     });
+
+  }
+  handleClose = () => this.setState({ modalOpen: false })
+
+  componentDidMount(){
+    
   }
 
    render() {

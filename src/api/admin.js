@@ -42,3 +42,7 @@ export const viewItemsInPo = (req_id) => {
 export const addNewItem = (body) => {
 	return axios.post(`/user_admin/addNewItem`, body);
 }
+
+export const editItem = (body) => {
+	return axios.put(`/user_admin/updateItem`, body);
+}

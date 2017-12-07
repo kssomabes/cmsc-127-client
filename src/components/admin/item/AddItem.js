@@ -66,27 +66,27 @@ export default class AddItem extends Component {
 
           <Form onSubmit = {this.submitItem}>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Name</label>
               <input placeholder='Name' name = 'name' onChange = {this.handleChange}/>
             </Form.Field>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Supplier</label>
               <input placeholder='Supplier' name = 'supplier' onChange = {this.handleChange}/>
             </Form.Field>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Unit Price</label>
               <input placeholder='Unit Price' name = 'unitPrice' onChange = {this.handleChange}/>
             </Form.Field>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Quantity</label>
               <input placeholder='Quantity' name = 'quantity' onChange = {this.handleChange}/>
             </Form.Field>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Description</label>
               <input placeholder='Description' name = 'description' onChange = {this.handleChange}/>
             </Form.Field>
