@@ -1,6 +1,5 @@
 import React, { Component} from "react";
-import axios from 'axios';
-import { Table, Icon, Button } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import { getAllDelivery } from '../../../api/admin';
 
 export default class ViewAll extends Component {

@@ -47,6 +47,11 @@ export const editItem = (body) => {
 	return axios.put(`/user_admin/updateItem`, body);
 }
 
+export const deleteItem = (item_code) => {
+	return axios.delete(`/user_admin/deleteItem/${item_code}`);
+
+}
+
 export const getAllDelivery = () => {
 	return axios.get(`/user_admin/getAllDelivery`);
 }

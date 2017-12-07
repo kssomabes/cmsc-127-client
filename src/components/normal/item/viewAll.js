@@ -42,7 +42,6 @@ export default class ViewAll extends Component {
 	                <Table.Cell> {item.name}</Table.Cell>
                   <Table.Cell> {item.quantity}</Table.Cell>
                   <Table.Cell> {item.description}</Table.Cell>
-
                  </Table.Row>
               );
             })

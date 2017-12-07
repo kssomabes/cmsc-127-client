@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { showItemsNoFilter } from '../../../api/items';
 import EditItem from './EditItem';
+import DeleteItem from './DeleteItem';
 
 export default class ViewAll extends Component {
 
@@ -50,6 +51,8 @@ export default class ViewAll extends Component {
                   <Table.Cell> {item.quantity}</Table.Cell>
                   <Table.Cell> {item.description}</Table.Cell>
                   <Table.Cell collapsing> <EditItem value = {item} /> </Table.Cell>
+                  <Table.Cell collapsing> <DeleteItem value = {item.itemCode} /> </Table.Cell>
+
 
                  </Table.Row>
               );
