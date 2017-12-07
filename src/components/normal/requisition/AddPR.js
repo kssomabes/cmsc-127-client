@@ -3,6 +3,8 @@ import { Button, Modal, Checkbox, Form, Dropdown, Table } from 'semantic-ui-reac
 import { showItems } from '../../../api/items';
 // this.props.value holds the userId
 
+let someVar = []; 
+
 export default class AddPR extends Component {
 
 
@@ -17,17 +19,33 @@ export default class AddPR extends Component {
   handleClose = () => this.setState({ modalOpen: false })
 
   submitPR = (e) => {
+        console.log('where api');
+
     e.preventDefault();
     // Call API for submit
+    this.state.requests = someVar;
     console.log(this.state);
+    console.log(e);
     console.log('where api');
   }
 
   
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  handleChange = (itemCode, e) => {
+    let exist;
+
+    console.log(itemCode, ' = ', e.target.value);
+    let newElement = {'itemCode':itemCode, 'quantity':parseInt(e.target.value)};
+
+    for (var i = 0; i<someVar.length; i++){
+
+      if (someVar[i].itemCode == newElement.itemCode){
+        exist = true;
+        someVar.splice(i, 0, newElement);
+        break;
+      }else exist = false;
+    }
+
+    if (!exist) someVar.push(newElement);
   }
 
   componentDidMount(){
@@ -38,13 +56,8 @@ export default class AddPR extends Component {
 
    render() {
 
-    let options = [];
 
     const {items} = this.state;
-    for (var i=0; i<items.length; i++){
-      let x = {key:items[i].itemCode, text:items[i].name, value:items[i].itemCode}
-      options.push(x);
-    }
 
     return (
       <div>
@@ -79,11 +92,10 @@ export default class AddPR extends Component {
 
                         <Form.Field>
                           <Table.Cell>
-                            <input name='reqQty' onChange={this.handleChange} placeholder='Request Quantity'/>
+                            <input name='quantity' onChange={(e) => this.handleChange(`${item.itemCode}`, e)}  placeholder='Request Quantity'/>
                           </Table.Cell> 
                         </Form.Field>
 
-                        <Table.Cell collapsing></Table.Cell>
                         <Table.Cell collapsing></Table.Cell>
                        </Table.Row>
                     );
@@ -95,10 +107,10 @@ export default class AddPR extends Component {
 
 
 
+          <Button type='submit'>SUBMIT</Button>
           </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button type='submit'>SUBMIT</Button>
             <Button primary onClick={this.handleClose}>BACK</Button>
           </Modal.Actions>
         </Modal>

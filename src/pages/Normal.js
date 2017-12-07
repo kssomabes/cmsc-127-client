@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { getSession } from '../api/auth';
 import Requisitions from '../components/normal/requisition/viewAll'
 import Orders from '../components/normal/order/viewAll';
+import Items from '../components/normal/item/viewAll';
 import AddPR from './../components/normal/requisition/AddPR'
 import { Input, Menu, Segment } from 'semantic-ui-react'
-
 
 class Admin extends Component{
 	constructor(props){
@@ -43,7 +43,10 @@ class Admin extends Component{
 			display = <Requisitions />;
 		else if (activeItem === 'orders'){ 
 			display = <Orders />;
-		}else console.log('hoho');
+		}else if (activeItem === 'items'){ 
+			console.log('active Item ', activeItem);
+			display = <Items />;
+		}else console.log('active Item ', activeItem);
 		
     return (
 	      <Segment inverted>

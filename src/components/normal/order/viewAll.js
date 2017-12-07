@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import axios from 'axios';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { getMyPurchOrder } from '../../../api/normal';
+import ViewPO from './ViewPO';
 
 export default class ViewAll extends Component {
 
@@ -25,8 +26,6 @@ export default class ViewAll extends Component {
             <Table.HeaderCell>Request ID </Table.HeaderCell>
             <Table.HeaderCell>Date Submitted</Table.HeaderCell>
             <Table.HeaderCell>Date Approved</Table.HeaderCell>
-            <Table.HeaderCell>Item Code</Table.HeaderCell>
-            <Table.HeaderCell>Quantity</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
 
           </Table.Row>
@@ -41,9 +40,7 @@ export default class ViewAll extends Component {
 	                <Table.Cell> {order.requestID}</Table.Cell>
                   <Table.Cell> {order.dateSubmitted}</Table.Cell>
                   <Table.Cell> {order.dateApproved}</Table.Cell>
-                  <Table.Cell>{order.itemCode}</Table.Cell>
-                  <Table.Cell>{order.quantity}</Table.Cell>
-                  <Table.Cell></Table.Cell>
+                  <Table.Cell collapsing><ViewPO value = {order.requestID}/></Table.Cell>
                   
                  </Table.Row>
               );

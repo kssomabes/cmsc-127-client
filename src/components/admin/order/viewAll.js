@@ -15,12 +15,10 @@ export default class ViewAll extends Component {
       this.setState({orders: res.data.data})
     });
 
-    console.log('my state ', this.state.orders);
   }
 
    render() {
     const {orders} = this.state;
-    console.log('my state ', this.state.orders);
     return (
       <Table singleLine striped color='teal'>
         <Table.Header >
@@ -41,9 +39,9 @@ export default class ViewAll extends Component {
               return (
                 <Table.Row key = {order.requestID} >
 	                <Table.Cell> {order.requestID}</Table.Cell>
-                  <Table.Cell>{order.userId}</Table.Cell>
+                  <Table.Cell>{order.userID}</Table.Cell>
                   <Table.Cell> {order.dateSubmitted}</Table.Cell>
-                  <Table.Cell collapsing> <ViewPO value = {order.requestID} /> </Table.Cell>
+                  <Table.Cell collapsing> <ViewPO requestID = {order.requestID} userID = {order.userID} /> </Table.Cell>
 
                  </Table.Row>
               );
