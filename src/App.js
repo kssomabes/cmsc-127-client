@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import Admin from './pages/Admin'
-import Home from './pages/Home';
 import Login from './pages/Login';
 import Normal from './pages/Normal'
 
-
-import PurchReq from './components/admin/requisition/viewAll';
-
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'; //gives you access to additional slashes to your address
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'; //gives you access to additional slashes to your address
 import { login, getSession } from './api/auth';
                             
                                                                   
@@ -25,7 +21,6 @@ class App extends Component {
 
 
   loginUser = credentials => {
-    const {history} = this.props;
     login(credentials).then((res, err) => {
       if (err) {
         alert("Error!");
@@ -57,7 +52,7 @@ class App extends Component {
           return (<div>
             {/*<Route exact path="/user_admin" component={Admin} />*/}
             <Route exact path="/user_admin" render = {() => <Admin appProps = {this.state}/>} />
-
+            <Redirect to="/user_admin" />
           </div>)
         }else if (this.state.user.accountType === 'NORMAL'){
           return (<div>

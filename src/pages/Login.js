@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router';
-import { Grid, Image, Message, Container, Header,  Button, Form, Segment } from 'semantic-ui-react'
+import { Grid, Message, Header,  Button, Form, Segment } from 'semantic-ui-react'
 
-import axios from 'axios';
 
 class Login extends Component{
 	constructor(props){
@@ -77,7 +75,7 @@ class Login extends Component{
           </Segment>
         </Form>
         <Message>
-          No account yet? <a href='#'>Sign Up</a>
+          No account yet?{/* <a href='#'>Sign Up</a>*/}
         </Message>
       </Grid.Column>
     </Grid>

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import NavBar from '../components/admin/NavBar';
 import { getSession } from '../api/auth';
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'; //gives you access to additional slashes to your address
 import Requisitions from '../components/admin/requisition/viewAll'
 import Orders from '../components/admin/order/viewAll';
 // import Items from '../components/admin/item/Item';
-import { Dropdown, Input, Menu, Segment } from 'semantic-ui-react'
+import { Input, Button, Menu, Segment } from 'semantic-ui-react'
 
 
 class Admin extends Component{
@@ -62,6 +59,8 @@ class Admin extends Component{
 	            <Menu.Item name='search' label='Search'>
 	            <Input icon='search' placeholder='Search username...'/>
 	            </Menu.Item>
+	            <Button icon='add' name='addItem' label= 'Inventory' active={activeItem === 'addItem'} onClick={this.handleItemClick} />
+	            <Button icon='add' name='addDelivery' label= 'Delivery' active={activeItem === 'addDelivery'} onClick={this.handleItemClick} />
 	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
 	          </Menu.Menu>
 	        </Menu>

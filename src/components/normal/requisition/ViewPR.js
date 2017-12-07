@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import { Table, Icon, Button, Modal, Header } from 'semantic-ui-react';
-import { viewItemsInPr } from '../../../api/admin';
+import { viewItemsInPr } from '../../../api/normal';
 
 export default class ViewPR extends Component {
 

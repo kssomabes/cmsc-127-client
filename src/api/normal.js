@@ -11,3 +11,7 @@ export const getMyPurchOrder = () => {
 export const deleteMyPurchReq = (req_id) => {
 	return axios.delete(`/user_normal/deleteMyPR/${req_id}`)
 }
+
+export const viewItemsInPr = (req_id) => {
+	return axios.get(`/user_normal/viewItemsInPr/${req_id}`); 
+}

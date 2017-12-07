@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { getSession } from '../api/auth';
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'; //gives you access to additional slashes to your address
 import Requisitions from '../components/normal/requisition/viewAll'
 import Orders from '../components/normal/order/viewAll';
-import { Dropdown, Input, Menu, Segment } from 'semantic-ui-react'
+import AddPR from './../components/normal/requisition/AddPR'
+import { Input, Menu, Segment } from 'semantic-ui-react'
 
 
 class Admin extends Component{
@@ -43,7 +42,6 @@ class Admin extends Component{
 		else if (activeItem === 'requisitions')
 			display = <Requisitions />;
 		else if (activeItem === 'orders'){ 
-			console.log('new display');
 			display = <Orders />;
 		}else console.log('hoho');
 		
@@ -53,11 +51,12 @@ class Admin extends Component{
 	          <Menu.Item name='home' label='Home' active={activeItem === 'home'} onClick={this.handleItemClick} />
 	          <Menu.Item name='requisitions' label='Requisitions' active={activeItem === 'requisitions'}onClick={this.handleItemClick} /> 
 	          <Menu.Item name='orders' label='Orders' active={activeItem === 'orders'} onClick={this.handleItemClick} />
-	          <Menu.Item name='items' label='Items' as='a' href='/items' active={activeItem === 'items'} onClick={this.handleItemClick} />
+	          <Menu.Item name='items' label='Items' active={activeItem === 'items'} onClick={this.handleItemClick} />
 	          <Menu.Menu position='right'>
 	            <Menu.Item name='search' label='Search'>
 	            <Input icon='search' placeholder='Search username...'/>
 	            </Menu.Item>
+	            <AddPR value={this.state.userId}/>
 	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
 	          </Menu.Menu>
 	        </Menu>
