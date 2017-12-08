@@ -11,3 +11,7 @@ export const showItemsNoFilter = () => {
 export const specificItem = (code) => {
 	return axios.get(`/item/getItem/${code}`);
 }
+
+export const findItem = (name) => {
+	return axios.get(`/item/findItem/${name}`);
+}

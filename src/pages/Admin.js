@@ -6,7 +6,10 @@ import Items from '../components/admin/item/viewAll';
 import Deliveries from '../components/admin/delivery/viewAll';
 import AddItem from '../components/admin/item/AddItem';
 import AddDelivery from '../components/admin/delivery/AddDelivery';
-import { Input, Button, Menu, Segment } from 'semantic-ui-react'
+import SearchPR from '../components/admin/requisition/Search';
+import SearchInv from '../components/admin/item/Search';
+
+import { Input, Button, Menu, Segment, Form } from 'semantic-ui-react'
 
 
 class Admin extends Component{
@@ -16,7 +19,9 @@ class Admin extends Component{
 	  this.state = { 
 	  	activeItem: 'home',
 	  	userId : '',
-	  	accountType: ''
+	  	accountType: '',
+	  	searchInv: '',
+	  	searchPR:''
 	  }
 	
 
@@ -28,8 +33,12 @@ class Admin extends Component{
 		this.setState({ activeItem: name })	
 	}
 
+
 	handleOnChange = (e) => {
-		console.log('Trying to search ', e.target.value);
+		// this.setState({searchInv: value});
+    this.setState({
+      [e.target.name]: e.target.value
+    });
 	}
 
 	componentDidMount(){
@@ -45,6 +54,7 @@ class Admin extends Component{
 
 		let display = {};		
 		const { activeItem } = this.state
+		console.log(activeItem);
 		if (activeItem ==='home') display = <Requisitions />;
 		else if (activeItem === 'requisitions')
 			display = <Requisitions />;
@@ -58,11 +68,11 @@ class Admin extends Component{
 			console.log('active Item ', activeItem);
 			display = <AddItem />;
 		}else if (activeItem === 'deliveries'){ 
-			display = <Deliveries />;
+			display = <Deliveries/>;
 		}
 
 		// else if (activeItem === 'items') display = <Items />
-		
+		const {searchInv,searchPR} = this.state;
     return (
 	      <Segment inverted>
 	        <Menu inverted pointing secondary>
@@ -72,15 +82,24 @@ class Admin extends Component{
 	          <Menu.Item name='items' label='Items'active={activeItem === 'items'} onClick={this.handleItemClick} />
 	          <Menu.Item name='deliveries' label='Deliveries' active={activeItem === 'deliveries'} onClick={this.handleItemClick} />
 	          <Menu.Menu position='right'>
-	            <Menu.Item name='searchPR' label='Search'>
-	            <Input icon='search' name ='searchPR' placeholder='Search PR...' onChange = {this.handleOnChange}/>
+
+	          	<Menu.Item> 
+	          	<SearchInv />
 	            </Menu.Item>
-	            <Menu.Item name='searchInventory' label='Search'>
-	            <Input icon='search' name ='searchPR' placeholder='Search PR...' onChange = {this.handleOnChange}/>
+	            <Menu.Item> 
+	            <SearchPR />
 	            </Menu.Item>
+	            <Menu.Item> 
 	            <AddItem />
+	            </Menu.Item>
+	            <Menu.Item> 
 	            <AddDelivery />
+	            </Menu.Item>
+
+
 	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+	           
+
 	          </Menu.Menu>
 	        </Menu>
 	        {display}

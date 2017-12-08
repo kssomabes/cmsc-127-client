@@ -3,6 +3,7 @@ import { Table, Icon, Button } from 'semantic-ui-react';
 import { getMyPurchReq } from '../../../api/normal';
 import DeletePR from './DeletePR';
 import ViewPR from './ViewPR';
+import EditPR from './EditPR';
 
 export default class ViewAll extends Component {
 
@@ -29,6 +30,7 @@ export default class ViewAll extends Component {
             <Table.HeaderCell>Date Submitted</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
 
           </Table.Row>
         </Table.Header>
@@ -42,6 +44,7 @@ export default class ViewAll extends Component {
 	                <Table.Cell> {requisition.requestID}</Table.Cell>
                   <Table.Cell> {requisition.dateSubmitted}</Table.Cell>
                   <Table.Cell collapsing><ViewPR value = {requisition.requestID}/></Table.Cell>
+                  <Table.Cell collapsing><EditPR value = {requisition}/></Table.Cell>
                   <Table.Cell collapsing><DeletePR value = {requisition.requestID}/></Table.Cell>
                  </Table.Row>
               );

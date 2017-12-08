@@ -55,3 +55,8 @@ export const deleteItem = (item_code) => {
 export const getAllDelivery = () => {
 	return axios.get(`/user_admin/getAllDelivery`);
 }
+
+
+export const findPr = (req_id) => {
+	return axios.get(`/user_admin/findPr/${req_id}`);
+}

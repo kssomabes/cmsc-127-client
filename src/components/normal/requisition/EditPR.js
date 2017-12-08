@@ -1,7 +1,10 @@
 import React, { Component} from "react";
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Table, Button, Modal, Form } from 'semantic-ui-react';
+import { editPR } from '../../../api/normal';
 
-export default class EditPR from extends Component {
+let someVar = [];
+
+export default class EditPR extends Component {
 
 
   state = {
@@ -14,41 +17,121 @@ export default class EditPR from extends Component {
 
   handleClose = () => this.setState({ modalOpen: false })
 
+
+
   editPR = (e) => {
+    
     e.preventDefault();
-    // Call API for submit
-    console.log(this.state);
-    console.log('where api');
+    let hasEdited = false;
+
+
+    let body = {
+      itemCode: this.state.item.itemCode,
+      quantity: this.state.quantity
+    }
+    
+    if (body.itemCode.length == 0) body.itemCode = this.state.item.itemCode; 
+    else hasEdited = true;
+    if (body.quantity.length == 0) body.quantity = this.state.item.quantity; 
+    else hasEdited = true;
+
+    body.quantity = parseInt(body.quantity).toFixed(0);
+
+    body.itemCode = parseInt(body.unitPrice);
+    body.quantity = parseInt(body.quantity);
+
+    if (hasEdited){
+      // call API
+      editPR(body).then((res) => {
+        if (res.data.data === 'SUCCESS'){
+          alert(`Successfully edited Item # ${this.state.item.itemCode}`);
+          window.location.reload();
+        }
+      });
+
+    }else{
+      alert('No changes were made!');
+    }
+
+    this.handleClose();
   }
 
   
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+      
   }
 
+
+
   componentDidMount(){
-  	// get the PR to be editted
-    viewItemsInPr(this.props.value).then((res) => {
-      this.setState({items:res.data.data});
-    });
+    console.log('he');
+    // console.log(this.props.value);
+    this.setState({item: this.props.value});
+
+    console.log(this.state);
   }
 
    render() {
 
+
+    const {items} = this.state;
+
     return (
       <div>
-        <Modal trigger={<Button icon='add' onClick={this.handleOpen}> Add Purchase Requisition</Button>} open={this.state.modalOpen} onClose={this.handleClose}>
-          <Modal.Header>Edit 	Purchase Requisition</Modal.Header>
+        <Modal trigger={<Button icon='edit' onClick={this.handleOpen}> Edit PR</Button>} open={this.state.modalOpen} onClose={this.handleClose}>
+          <Modal.Header>Edit PR</Modal.Header>
           <Modal.Content>
 
           <Form onSubmit = {this.editPR}>
+            
 
+            <Table singleLine striped color='teal'>
+              <Table.Header >
+              </Table.Header>
+              <Table.Header >
+                <Table.Row >
+                  <Table.HeaderCell>Item <br/> Code</Table.HeaderCell>
+                  <Table.HeaderCell>Requested <br/> Quantity</Table.HeaderCell>
+                  <Table.HeaderCell></Table.HeaderCell>
+                  <Table.HeaderCell></Table.HeaderCell>
+
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+
+                {
+                items.map((item) => {
+                    return (
+                      <Table.Row key = {item.itemCode} >
+                        <Table.Cell> {item.name}</Table.Cell>
+                        <Table.Cell> {item.quantity}</Table.Cell>
+
+                        <Form.Field>
+                          <Table.Cell>
+                            <input name='quantity' onChange={(e) => this.handleChange(`${item.itemCode}`, e)}  placeholder='Request Quantity'/>
+                          </Table.Cell> 
+                        </Form.Field>
+
+                        <Table.Cell collapsing></Table.Cell>
+                       </Table.Row>
+                    );
+                  })
+                }
+
+              </Table.Body>  
+            </Table>
+
+
+
+          <Button type='submit'>SUBMIT</Button>
           </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button type='submit'>SUBMIT</Button>
             <Button primary onClick={this.handleClose}>BACK</Button>
           </Modal.Actions>
         </Modal>

@@ -27,3 +27,7 @@ export const getMyDelivery = (userID) => {
 export const addPR = (body) => {
 	return axios.post(`/user_normal/addNewPurchReq`, body);
 }
+
+export const editPR = (body) => {
+	return axios.put(`/user_admin/updatePurchReq`, body);
+}

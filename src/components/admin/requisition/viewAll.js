@@ -1,6 +1,6 @@
 import React, { Component} from "react";
-import { Table, Icon, Button } from 'semantic-ui-react';
-import { getPrAndItems, getAllPurchReq } from '../../../api/admin';
+import { Table } from 'semantic-ui-react';
+import { getAllPurchReq } from '../../../api/admin';
 import ApprovePR from './ApprovePR';
 import ViewPR from './ViewPR';
 
