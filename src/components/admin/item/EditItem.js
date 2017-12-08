@@ -7,12 +7,12 @@ export default class Edited extends Component {
 
   state = {
     modalOpen: false,
-    item: [],
-    name: '',
-    supplier: '',
-    unitPrice: '',
-    quantity: '',
-    description: ''
+    itemCode: this.props.value.itemCode,
+    name: this.props.value.name,
+    supplier: this.props.value.supplier,
+    unitPrice: this.props.value.unitPrice,
+    quantity: this.props.value.quantity,
+    description: this.props.value.description
   }
 
   handleOpen = () => this.setState({ modalOpen: true })
@@ -26,7 +26,7 @@ export default class Edited extends Component {
     console.log('my current state', this.state);
 
     let body = {
-      itemCode: this.state.item.itemCode,
+      itemCode: this.state.itemCode,
       name: this.state.name,
       supplier: this.state.supplier,
       unitPrice: this.state.unitPrice,
@@ -34,16 +34,6 @@ export default class Edited extends Component {
       description: this.state.description
     }
 
-    if (body.name.length == 0) body.name = this.state.item.name; 
-    else hasEdited = true;
-    if (body.supplier.length == 0) body.supplier = this.state.item.supplier;
-    else hasEdited = true;
-    if (body.unitPrice.length == 0) body.unitPrice = this.state.item.unitPrice; 
-    else hasEdited = true;
-    if (body.quantity.length == 0) body.quantity = this.state.item.quantity; 
-    else hasEdited = true;
-    if (body.description.length == 0) body.description = this.state.item.description; 
-    else hasEdited = true;
 
     body.unitPrice = parseFloat(body.unitPrice).toFixed(2);
     body.quantity = parseInt(body.quantity).toFixed(0);
@@ -51,21 +41,16 @@ export default class Edited extends Component {
     body.unitPrice = parseFloat(body.unitPrice);
     body.quantity = parseInt(body.quantity);
 
-    if (hasEdited){
       // call API
       editItem(body).then((res) => {
         if (res.data.data === 'SUCCESS'){
-          alert(`Successfully edited Item # ${this.state.item.itemCode}`);
+          alert(`Successfully edited Item # ${this.state.itemCode}`);
           window.location.reload();
-        }
+        }else alert('No changes were made!');
       });
-
-    }else{
-      alert('No changes were made!');
-    }
-
     this.handleClose();
-  }
+    }
+  
 
   
   handleChange = (e) => {
@@ -77,18 +62,17 @@ export default class Edited extends Component {
   }
 
 
-
-  componentDidMount(){
-
-    this.setState({item:this.props.value});
-
-    console.log('your data ', this.props.value);
-  }
-
    render() {
 
 
-    const {item} = this.state;
+    const {
+       itemCode
+       ,name
+       ,supplier
+       ,unitPrice
+       ,quantity
+       ,description
+    } = this.state;
 
     return (
       <div>
@@ -101,32 +85,32 @@ export default class Edited extends Component {
 
             <Form.Field>
               <label>Item Code</label>
-              <input disabled defaultValue = {item.itemCode || ''} name = 'itemCode'/>
+              <input disabled value = {itemCode} name = 'itemCode'/>
             </Form.Field>
 
             <Form.Field>
               <label>Name</label>
-              <input defaultValue = {item.name || ''} name = 'name' onChange = {this.handleChange}/>
+              <input value = {name} name = 'name' onChange = {this.handleChange}/>
             </Form.Field>
 
             <Form.Field>
               <label>Supplier</label>
-              <input defaultValue = {item.supplier || ''} name = 'supplier' onChange = {this.handleChange}/>
+              <input value = {supplier} name = 'supplier' onChange = {this.handleChange}/>
             </Form.Field>
 
             <Form.Field>
               <label>Unit Price</label>
-              <input  defaultValue = {item.unitPrice || ''} name = 'unitPrice' onChange = {this.handleChange}/>
+              <input  value = {unitPrice} name = 'unitPrice' onChange = {this.handleChange}/>
             </Form.Field>
 
             <Form.Field>
               <label>Quantity</label>
-              <input defaultValue = {item.quantity || ''} name = 'quantity' onChange = {this.handleChange}/>
+              <input value = {quantity} name = 'quantity' onChange = {this.handleChange}/>
             </Form.Field>
 
             <Form.Field>
               <label>Description</label>
-              <input defaultValue = {item.description || ''} name = 'description' onChange = {this.handleChange}/>
+              <input value = {description} name = 'description' onChange = {this.handleChange}/>
             </Form.Field>
 
 
