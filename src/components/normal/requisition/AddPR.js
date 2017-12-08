@@ -1,7 +1,7 @@
 import React, { Component} from "react";
 import { Button, Modal, Checkbox, Form, Dropdown, Table } from 'semantic-ui-react';
 import { showItems } from '../../../api/items';
-import { editPR } from '../../../api/normal';
+import { addPR } from '../../../api/normal';
 
 // this.props.value holds the userId
 
@@ -26,7 +26,7 @@ export default class AddPR extends Component {
     // Call API for submit
     this.state.requests = someVar;
 
-    editPR(someVar).then((res)=> {
+    addPR(someVar).then((res)=> {
       if (!res.data.data){
         alert('Internal server error. Failed to add PR');
       }else {
