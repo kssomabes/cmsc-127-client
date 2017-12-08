@@ -8,6 +8,7 @@ import AddItem from '../components/admin/item/AddItem';
 import AddDelivery from '../components/admin/delivery/AddDelivery';
 import SearchPR from '../components/admin/requisition/Search';
 import SearchInv from '../components/admin/item/Search';
+import SearchUser from '../components/admin/requisition/SearchUser';
 
 import { Input, Button, Menu, Segment, Form } from 'semantic-ui-react'
 
@@ -90,6 +91,9 @@ class Admin extends Component{
 	            <SearchPR />
 	            </Menu.Item>
 	            <Menu.Item> 
+	            <SearchUser />
+	            </Menu.Item>
+	            <Menu.Item> 
 	            <AddItem />
 	            </Menu.Item>
 	            <Menu.Item> 
@@ -97,7 +101,7 @@ class Admin extends Component{
 	            </Menu.Item>
 
 
-	            <Menu.Item name='logout' label= 'Logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+	            <Menu.Item name='logout' label= 'Logout' as='a' href='/logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
 	           
 
 	          </Menu.Menu>

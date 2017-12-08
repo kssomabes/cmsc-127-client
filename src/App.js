@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Normal from './pages/Normal'
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'; //gives you access to additional slashes to your address
-import { login, getSession } from './api/auth';
+import { login, logout, getSession } from './api/auth';
                             
                                                                   
 class App extends Component {
@@ -30,6 +30,16 @@ class App extends Component {
       }
     })
     
+  }
+
+  logOut = () => {
+    logout().then((res, err) =>{
+      if (err){
+        alert("error");
+      }else{
+        this.setState({user:'', isLoggingIn: false});
+      }
+    })
   }
 
   componentDidMount() {
@@ -82,6 +92,7 @@ class App extends Component {
                 this.renderThis()
               }
             <Switch>
+
             </Switch>
           </div>
         </Router>

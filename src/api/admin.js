@@ -60,3 +60,11 @@ export const getAllDelivery = () => {
 export const findPr = (req_id) => {
 	return axios.get(`/user_admin/findPr/${req_id}`);
 }
+
+export const addDelivery = (req_id) => {
+	return axios.post(`/user_admin/insertDelivery`, req_id);
+}
+
+export const getAllPrOfUser = (user_id)=> {
+	return axios.get(`/user_admin/getAllPR/${user_id}`);
+}

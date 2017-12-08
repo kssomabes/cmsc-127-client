@@ -25,8 +25,6 @@ export default class ViewAll extends Component {
             <Table.HeaderCell>Request ID </Table.HeaderCell>
             <Table.HeaderCell>User ID </Table.HeaderCell>
             <Table.HeaderCell>Date Received</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-
 
           </Table.Row>
         </Table.Header>
@@ -39,7 +37,7 @@ export default class ViewAll extends Component {
                 <Table.Row key = {delivery.requestID} >
 	                <Table.Cell> {delivery.requestID}</Table.Cell>
                   <Table.Cell>{delivery.userID}</Table.Cell>
-                  <Table.Cell> {delivery.dateSubmitted}</Table.Cell>
+                  <Table.Cell> {delivery.deliveryDate}</Table.Cell>
                  </Table.Row>
               );
             })

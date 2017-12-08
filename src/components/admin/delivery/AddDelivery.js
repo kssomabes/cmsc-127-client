@@ -1,13 +1,15 @@
 import React, { Component} from "react";
 import { Button, Modal, Checkbox, Form, Dropdown, Table } from 'semantic-ui-react';
 import { showItems } from '../../../api/items';
+import { addDelivery } from '../../../api/admin';
 
 export default class AddDelivery extends Component {
 
 
   state = {
     modalOpen: false,
-    items: []
+    items: [],
+    requestID: ''
   }
 
   handleOpen = () => this.setState({ modalOpen: true })
@@ -16,11 +18,23 @@ export default class AddDelivery extends Component {
 
   submitItem = (e) => {
 
+    var b = parseInt(this.state.requestID).toFixed(0);
 
+    let body = {
+      requestID: b
+    }
+
+    addDelivery(body).then((res) => {
+      if (res.data.data === 'SUCCESS') alert("Successfully added delivered material");
+      else alert("Failed to add delivered material");
+    });
+    
+    this.handleClose();
+    window.location.reload();
   }
 
   
-  handleChange = (itemCode, e) => {
+  handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -35,7 +49,6 @@ export default class AddDelivery extends Component {
    render() {
 
 
-    const {items} = this.state;
 
     return (
       <div>
@@ -45,12 +58,16 @@ export default class AddDelivery extends Component {
 
           <Form onSubmit = {this.submitItem}>
             
+          <Form.Field required>
+            <label>Request ID</label>
+            <input placeholder='Request ID' name = 'requestID' onChange = {this.handleChange}/>
+          </Form.Field>
 
           <Button type='submit'>SUBMIT</Button>
           </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button primary onClick={this.handleClose}>BACK</Button>
+            <Button primary onClick={this.handleClose}>BACK</Button>  
           </Modal.Actions>
         </Modal>
       </div>
